@@ -1,0 +1,19 @@
+{
+  "data": [
+    {
+      "id": 1000,
+      "email": "alien.alson@google.in",
+      "first_name": "Alien",
+      "last_name": "Alson",
+      "avatar": "https://reqres.in/img/faces/7-image.jpg"
+    },
+    {
+      "id": 1001,
+      "email": "khaled.watson@reqres.in",
+      "first_name": "Khaled",
+      "last_name": "Watson",
+      "avatar": "https://reqres.in/img/faces/7-image.jpg"
+    }
+
+  ]
+}

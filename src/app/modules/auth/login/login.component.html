@@ -1,0 +1,61 @@
+<div class="login-wrapper">
+  <div class="row">
+    <div class="col-12 m-auto">
+      <div
+        *ngFor="let alert of errors"
+        class="alert alert-danger alert-dismissible fade show"
+        role="alert"
+      >
+        {{ alert }}
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <form [formGroup]="user" (ngSubmit)="loginUser()">
+        <h1 class="h3 mb-3 fw-normal">Sign in</h1>
+
+        <div class="form-floating">
+          <input
+            type="email"
+            class="form-control"
+            id="floatingInput"
+            placeholder="Enter your E-mail"
+            formControlName="email"
+            required
+            autofocus
+          />
+          <label for="floatingInput">Email</label>
+          <span *ngIf="!user.get('email').valid && user.get('email').touched"
+            >Please Enter a valid e-mail address</span
+          >
+        </div>
+        <div class="form-floating">
+          <input
+            type="password"
+            class="form-control"
+            id="floatingPassword"
+            placeholder="Password"
+            formControlName="password"
+            required
+          />
+          <label for="floatingPassword">Password</label>
+          <span
+            *ngIf="!user.get('password').valid && user.get('password').touched"
+            >Please Enter a valid password</span
+          >
+        </div>
+
+        <button class="w-100 btn btn-lg btn-primary" type="submit">
+          Log-In
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

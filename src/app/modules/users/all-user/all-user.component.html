@@ -1,0 +1,106 @@
+<nav class="navbar navbar-light bg-dark col-12 col-md-12">
+  <div class="container-fluid">
+    <h1 style="color: aliceblue">Users Table</h1>
+    <div class="d-flex">
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+      >
+        Add User
+      </button>
+      <button
+        class="btn btn-danger btn-sm ms-2 px-3"
+        *ngIf="isLogged()"
+        (click)="logout()"
+      >
+        logout
+      </button>
+    </div>
+  </div>
+</nav>
+<table class="table table-hover mt-3">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">E-mail</th>
+      <th scope="col">First-Name</th>
+      <th scope="col">Last-Name</th>
+      <th scope="col">Avatar</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of userData">
+      <td >{{ user.id }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.first_name }}</td>
+      <td>{{ user.last_name }}</td>
+      <td><img src = '{{user.avatar}}' style="width: 50px;"></td>
+      <td>
+        <span routerLink="/users/single-user/{{user.id}}"><i class="far fa-eye fs-3 mx-3" style="color: green; cursor: pointer;"></i></span>
+      <span routerLink="/users/update/{{user.id}}"><i class="far fa-edit fs-3 mx-3" style="color: dodgerblue; cursor: pointer;"></i></span>
+        <span  (click)="onDelete(user.id)"><i class="far fa-trash-alt fs-3" style="color: firebrick; cursor: pointer;"></i></span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Modal -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="row">
+    <div class="col-12 m-auto">
+      <div
+        *ngFor="let alert of errors"
+        class="alert alert-danger alert-dismissible fade show"
+        role="alert"
+      >
+        {{ alert }}
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+    </div>
+  </div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add New User</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup] ="user" >
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">First Name</label>
+            <input type="text" class="form-control" formControlName="first_name" id="exampleInputEmail1" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Last Name</label>
+            <input type="text" class="form-control" formControlName="last_name" id="exampleInputEmail1" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <input type="email" class="form-control" formControlName="email" id="exampleInputEmail1" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Avatar</label>
+            <input type="text" class="form-control" formControlName="avatar" id="exampleInputEmail1" aria-describedby="emailHelp">
+          </div>
+
+        </form>
+        </div>
+      <div class="modal-footer">
+        <button type="button" id ="cancel" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="postUserModal()">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
